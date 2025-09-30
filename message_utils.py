@@ -6,3 +6,8 @@ def show_loading(number_of_seconds):
       print('\r* ', end='')
       sys.stdout.flush()
       sleep(1)
+      
+def handle_failure(msg):
+    if msg:
+        print(msg)
+    show_loading(12)
