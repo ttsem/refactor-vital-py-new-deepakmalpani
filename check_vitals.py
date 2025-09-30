@@ -1,5 +1,5 @@
 from error_messages import ERROR_MESSAGES
-from message_utils import handle_failure, show_loading
+from message_utils import handle_failure
 
 def check_temperature(temperature):
   return temperature > 102 or temperature < 95
@@ -11,12 +11,14 @@ def check_spo2(spo2):
   return spo2 < 90
   
 def vitals_ok(temperature, pulse_rate, spo2):
-  if check_temperature(temperature): 
-    return False
-  if check_pulserate(pulse_rate):
-    handle_failure(ERROR_MESSAGES["pulse_rate"])
-    return False
-  if check_spo2(spo2):
-    handle_failure(ERROR_MESSAGES["spo2"])
-    return False
+  checks = [
+    (check_temperature, temperature, "temperature")
+    (check_pulserate, pulse_rate, "pulse_rate"),
+    (check_spo2, spo2, "spo2")
+  ]
+  for check_function, vital_param, error_key in checks:
+    if check_function(vital_param):
+      handle_failure(error_key)
+      return False
+    
   return True
