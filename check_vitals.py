@@ -1,11 +1,4 @@
-from time import sleep
-import sys
-
-def show_loading(number_of_seconds):
-  for _ in range(number_of_seconds):
-      print('\r* ', end='')
-      sys.stdout.flush()
-      sleep(1)
+from loading_utils import show_loading
 
 def check_temperature(temperature):
   if temperature > 102 or temperature < 95:
@@ -28,4 +21,7 @@ def check_spo2(spo2):
   return True
   
 def vitals_ok(temperature, pulse_rate, spo2):
-  return check_temperature(temperature) and check_pulserate(pulse_rate) and check_spo2(spo2)
+  if check_temperature(temperature) : 
+    show_loading(12)
+    return False
+  return check_pulserate(pulse_rate) and check_spo2(spo2)
