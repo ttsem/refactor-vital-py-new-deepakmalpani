@@ -10,16 +10,16 @@ def print_loading_statement():
       print('\r *', end='')
       sys.stdout.flush()
       sleep(1)
-
+  
 def vitals_ok(temperature, pulseRate, spo2):
   if temperature > 102 or temperature < 95:
     print_loading_statement()
     return False
-  elif pulseRate < 60 or pulseRate > 100:
+  if pulseRate < 60 or pulseRate > 100:
     print('Pulse Rate is out of range!')
     print_loading_statement()
     return False
-  elif spo2 < 90:
+  if spo2 < 90:
     print('Oxygen Saturation out of range!')
     print_loading_statement()
     return False
