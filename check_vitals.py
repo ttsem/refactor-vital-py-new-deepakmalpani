@@ -12,7 +12,7 @@ def check_spo2(spo2):
 def vitals_ok(temperature, pulse_rate, spo2):
   checks = [
     (check_temperature, temperature, "temperature"),
-    (check_pulserate, pulse_rate, "pulse_rate"),
+    (check_pulserate, pulse_rate, "temperature"),
     (check_spo2, spo2, "spo2")
   ]
   for check_function, vital_param, error_key in checks:
